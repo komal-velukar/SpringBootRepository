@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head><title>Dashboard</title></head><body>
+<h2>Employee Dashboard</h2>
+<form onsubmit="event.preventDefault(); saveEmp();">
+<input type="text" id="empname" placeholder="Name" required />
+<input type="text" id="empaddr" placeholder="Address" required />
+<input type="text" id="empsal" placeholder="Salary" required />
+<input type="text" id="empphno" placeholder="Phone" required />
+<input type="email" id="empemail" placeholder="Email" required />
+<input type="text" id="empdept" placeholder="Department" required />
+<input type="date" id="empdoj" placeholder="Date of Joining" required />
+<button type="submit">Add Employee</button></form><hr />
+<table border="1" id="empTable">
+<thead><tr><th>ID</th><th>Name</th><th>Dept</th><th>Email</th><th>Actions</th></tr></thead><tbody></tbody></table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/empdashboard.js"></script>
+</body></html>
