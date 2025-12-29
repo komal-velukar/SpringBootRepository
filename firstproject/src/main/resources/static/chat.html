@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 380px;
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+        }
+        h2 {
+            text-align: center;
+        }
+        #messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+        .msg-user {
+            text-align: right;
+            color: blue;
+            margin: 5px 0;
+        }
+        .msg-bot {
+            text-align: left;
+            color: black;
+            margin: 5px 0;
+        }
+        input {
+            width: 75%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #aaa;
+        }
+        button {
+            width: 20%;
+            padding: 10px;
+            border: none;
+            background: dodgerblue;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: royalblue;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Komal AI Chatbot</h2>
+    <div id="messages"></div>
+    <br>
+    <input type="text" id="q" placeholder="Ask something...">
+    <button onclick="sendMsg()">Send</button>
+</div>
+
+<script>
+    function sendMsg() {
+        let q = document.getElementById("q").value;
+        if (q.trim() === "") return;
+
+        // show user's message
+        document.getElementById("messages").innerHTML += `<p class='msg-user'><b>You:</b> ${q}</p>`;
+
+        // call backend
+        fetch(`/chat?q=` + encodeURIComponent(q))
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("messages").innerHTML += `<p class='msg-bot'><b>Bot:</b> ${data}</p>`;
+                document.getElementById("messages").scrollTop = document.getElementById("messages").scrollHeight;
+            });
+
+        document.getElementById("q").value = "";
+    }
+</script>
+</body>
+</html>
